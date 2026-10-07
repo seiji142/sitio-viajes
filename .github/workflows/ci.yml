@@ -1,0 +1,40 @@
+name: CI
+
+# Núcleo FRAMEWORK 2026.10.05.2 — stack del proyecto: HTML/CSS/JS (sitio estático).
+# El job `artefactos` (sin dependencias) corre siempre: CI verde día uno.
+# El bloque Node queda comentado hasta que exista package.json + tests.
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop, "feature/*"]
+
+jobs:
+  artefactos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/ci_checks.py
+
+  # Job `build` (gitflow, adaptado a sitio estático sin Node/package.json:
+  # solo checkout, verde siempre). Proyectos Node: reemplazar por el job
+  # `build` del scaffold (npm ci + npm run build con su ruta de app).
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+  # --- Stack HTML/CSS/JS: sin job de tests hasta tener package.json ---
+  # Cuando se agregue package.json, descomentar:
+  # tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v6
+  #     - uses: actions/setup-node@v6
+  #       with:
+  #         node-version: 24
+  #     - run: npm ci
+  #     - run: npm test

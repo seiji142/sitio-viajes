@@ -1,0 +1,34 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "groq/openai/gpt-oss-20b",
+  "compaction": {
+    "auto": false,
+    "prune": true
+  },
+  "instructions": [
+    ".ai/system.md",
+    ".ai/rules.md",
+    ".ai/context.md",
+    ".ai/agents.md",
+    ".ai/MEMORY.md"
+  ],
+  "permission": {
+    "bash": "ask",
+    "webfetch": "ask",
+    "write": "ask",
+    "edit": "ask"
+  },
+  "skills": {
+    "paths": [".agents/skills"]
+  },
+  "mcp": {
+    "youtube-transcripts": {
+      "type": "local",
+      "command": [
+        "C:\\Users\\seiji\\OneDrive\\Documentos\\Proyecto AI\\youtube-transcripts\\.venv\\Scripts\\python.exe",
+        "C:\\Users\\seiji\\OneDrive\\Documentos\\Proyecto AI\\youtube-transcripts\\mcp_server.py"
+      ],
+      "enabled": true
+    }
+  }
+}
