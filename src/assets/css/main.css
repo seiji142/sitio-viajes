@@ -1,0 +1,135 @@
+/* sitio-viajes: tokens + layout mobile-first (breakpoint 768px). */
+:root {
+  --color-bg: #faf7f0;
+  --color-ink: #1f2937;
+  --color-accent: #0e7490;
+  --color-card: #ffffff;
+  --color-muted: #6b7280;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --radius: 0.75rem;
+  --max-width: 64rem;
+  --breakpoint-md: 768px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+.site-header {
+  background: var(--color-ink);
+  color: var(--color-bg);
+  padding: var(--space-sm);
+}
+
+.site-nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.brand {
+  color: var(--color-bg);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-menu {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-sm);
+}
+
+.nav-menu.open {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-menu a {
+  color: var(--color-bg);
+}
+
+.nav-toggle {
+  background: transparent;
+  color: var(--color-bg);
+  border: 1px solid var(--color-bg);
+  border-radius: var(--radius);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+}
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-sm);
+}
+
+.hero {
+  text-align: center;
+  padding: var(--space-lg) var(--space-sm);
+}
+
+.cta {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  text-decoration: none;
+  margin-top: var(--space-sm);
+}
+
+.cards {
+  display: grid;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  padding: var(--space-sm);
+}
+
+.card-media {
+  height: 10rem;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-muted));
+}
+
+.site-footer {
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--color-muted);
+}
+
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-menu {
+    display: flex;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

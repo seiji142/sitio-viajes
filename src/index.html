@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="sitio-viajes: guias y destinos para tu proximo viaje.">
+  <title>sitio-viajes | Inicio</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Navegacion principal">
+      <a class="brand" href="index.html">sitio-viajes</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+      <ul id="nav-menu" class="nav-menu">
+        <li><a href="index.html" aria-current="page">Inicio</a></li>
+        <li><a href="#destinos">Destinos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" data-effect="none" aria-labelledby="hero-title">
+      <h1 id="hero-title">Viaja mas, planea mejor</h1>
+      <p>Guias claras de destinos, con lo esencial y sin ruido.</p>
+      <a class="cta" href="#destinos">Ver destinos destacados</a>
+    </section>
+
+    <section class="destinos" id="destinos" data-effect="none" aria-labelledby="destinos-title">
+      <h2 id="destinos-title">Destinos destacados</h2>
+      <ul class="cards">
+        <li class="card">
+          <div class="card-media" role="img" aria-label="Imagen ilustrativa de Paris"></div>
+          <h3>Paris</h3>
+          <p>La ciudad de la luz en 3 dias.</p>
+          <a href="#" aria-disabled="true">Proximamente</a>
+        </li>
+        <li class="card">
+          <div class="card-media" role="img" aria-label="Imagen ilustrativa de Kioto"></div>
+          <h3>Kioto</h3>
+          <p>Templos, jardines y calma.</p>
+          <a href="#" aria-disabled="true">Proximamente</a>
+        </li>
+        <li class="card">
+          <div class="card-media" role="img" aria-label="Imagen ilustrativa de Machu Picchu"></div>
+          <h3>Machu Picchu</h3>
+          <p>La maravilla andina paso a paso.</p>
+          <a href="#" aria-disabled="true">Proximamente</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="contacto" id="contacto" data-effect="none" aria-labelledby="contacto-title">
+      <h2 id="contacto-title">Contacto</h2>
+      <p>Escribenos con tus dudas o sugerencias de destinos.</p>
+      <a class="cta" href="mailto:contacto@example.com">contacto@example.com</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>sitio-viajes — sitio estatico de demostracion.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+    integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+    crossorigin="anonymous"></script>
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
