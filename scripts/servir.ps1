@@ -4,9 +4,16 @@
 $ErrorActionPreference = "Stop"
 $port = 8000
 $root = Join-Path (Join-Path $PSScriptRoot "..") "src"
+if (-not (Test-Path -LiteralPath $root)) {
+  Write-Output "ERROR: no existe la carpeta $root"
+  exit 1
+}
 Write-Output "Sirviendo $root en http://localhost:$port (Ctrl+C para detener)"
-if (Get-Command python -ErrorAction SilentlyContinue) {
+try {
+  $py = Get-Command python -ErrorAction Stop
+  Write-Output "Python: $($py.Source)"
   python -m http.server $port --directory $root
-} else {
+} catch {
+  Write-Output "Python no disponible, probando npx serve (requiere Node)..."
   npx serve $root -l $port
 }
