@@ -60,6 +60,8 @@ build, sin backend). CI sin cambios (`artefactos`).
 ## 7. Criterio de aceptación
 El esqueleto carga sin errores con GSAP por CDN, cada seccion expone su slot data-effect, scripts/servir.* levanta el servidor local en 200, modo background verificado (200 sin ventana + puerto cerrado al detener), y el CI sigue verde (job artefactos, sin cambios).
 
+**Aceptado por el humano en el chat el 2026-10-07** ("si dale, ya lo vi": preview revisado visualmente).
+
 ## 8. Lecciones del fix (DESPUÉS de implementar, obligatorio)
 
 Orden correcto ante un fallo (nunca reescribir el spec para justificar la

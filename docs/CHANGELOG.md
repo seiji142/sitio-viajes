@@ -37,3 +37,7 @@ worktree vigente. Pendiente manual del humano: proteccion de `main`
 ignorado por git) + `scripts/detener.bat` (apaga por PID con `/T`,
 respaldo por puerto). Verificado: 200 sin ventana visible, puerto
 cerrado + `.pid` eliminado al detener. Un fix (`taskkill /FI`).
+
+### 2026-10-07 — Aceptación visual del esqueleto (criterio §7 de `base-extensible.md`)
+Humano confirma en el chat ("ya lo vi"): preview revisado visualmente.
+Línea base formal para el primer efecto visual.
