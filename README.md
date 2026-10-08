@@ -7,10 +7,10 @@ Agente especialista en tutoriales web con capa opcional de dominio YouTube
 > Framework: adopcion del Nucleo de `personalizar-comportamiento-01`
 > — **FRAMEWORK_VERSION instalada: 2026.10.05.2** (ver `docs/REUTILIZAR.md`
 > del proyecto fuente). Capas: Nucleo (siempre) + dominio YouTube (pedido).
-> Sin MCP `brain-ai`. Nota: el repo ya traia piezas gitflow de un commit
-> previo (`scripts/gh-publish.ps1`, `.github/workflows/deploy.yml`,
-> `VERSION`, ramas `main`/`develop`) — no instaladas ni modificadas en
-> esta sesion.
+> Sin MCP `brain-ai`. Gitflow registrado 2026-10-07 en este proyecto:
+> ramas `main`/`develop`, `VERSION 2026.10.05.1` (= scaffold, sin re-copies),
+> flujo documentado en `.ai/context.md` (Ramas) y `.ai/commands.md`
+> (Publicacion). Alcance: solo registro — sin publicar a `main`, sin deploy.
 > Gitflow adoptado vía `/adoptar-gitflow`: `ci.yml` fusionado
 > (`artefactos` + `build` mínimo sin Node) + `deploy.yml` (Pages, `src/`) +
 > `scripts/gh-publish.ps1` — scaffold `gitflow-scaffold VERSION 2026.10.05.1`.

@@ -52,3 +52,18 @@ por "cambio chico". Este es codigo visual (sitio estatico HTML/CSS/JS).
 
 Regla: el riesgo percibido NUNCA saltea pasos. Lo que no tiene evidencia
 (chequeo local + CI verde) se considera NO verificado.
+
+## Publicacion (PRs y merges)
+
+OBLIGATORIO: NUNCA uses `gh pr create` / `gh pr merge` directos.
+Todo PR y merge pasa por `scripts/gh-publish.ps1` (ejecutar desde la raiz del repo).
+
+| Tarea | Comando |
+|-------|---------|
+| PR + merge `feature/x` -> `develop` | `.\scripts\gh-publish.ps1 -Rama feature/x -Base develop -Merge` |
+| PR + merge `develop` -> `main` (publicar, dispara Pages) | `.\scripts\gh-publish.ps1 -Merge` |
+| Solo crear PR (sin mergear) | Mismo comando sin `-Merge` |
+
+Pre-publicar a `main`: OK visual EXPLICITO del usuario en el chat + Pages
+activado (`Settings` → `Pages` → `Source: GitHub Actions`). Sin ese mensaje,
+NO hay PR a `main`.

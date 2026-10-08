@@ -60,3 +60,22 @@ Servidor `youtube-transcripts` (registrado en `opencode.json`).
 - Accesibilidad minima: `lang="es"`, `alt` en imagenes, contraste AA,
   navegacion por teclado en menus.
 - Responsive: mobile-first, breakpoint base 768px.
+
+## Ramas del Proyecto (gitflow registrado 2026-10-07; kit `2026.10.05.1`)
+
+| Rama | Proposito | Sale de | Vuelve a | Proteccion |
+|------|-----------|---------|----------|------------|
+| `main` | Produccion (deploy a Pages via `deploy.yml`) | — | — | Requiere PR, SIN "Require approvals" |
+| `develop` | Desarrollo diario (rama por defecto) | `main` | `main` (PR al publicar) | No |
+| `feature/<desc>` | Cada tarea o experimento | `develop` | `develop` (PR) | No |
+
+Reglas de comportamiento:
+- Trabajar SIEMPRE en `develop`. Antes de modificar, verificar la rama actual;
+  si se esta en `main`, no trabajar ahi.
+- `main` solo se toca para publicar, via PR desde `develop` (dispara el deploy).
+- Tareas grandes o experimentos: `feature/<desc>` desde `develop`, merge de
+  vuelta a `develop`.
+- Higiene por feature (§1b del template): mergear la rama anterior antes de
+  empezar la siguiente; el spec porta la intencion.
+- Proteccion de `main` = "Requerir PR" SIN "Require approvals": en repo personal
+  el autor no puede aprobar su propio PR (bloqueo permanente si se activa).
