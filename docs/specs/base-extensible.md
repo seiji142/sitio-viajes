@@ -1,6 +1,6 @@
 ---
 titulo: Base extensible del sitio (layout + CSS vars + slots data-effect)
-estado: implementado  # borrador | aprobado | implementado (enmienda lanzador verificada 2026-10-07)
+estado: implementado  # borrador | aprobado | implementado (enmienda background verificada 2026-10-07)
 entradas:
   - docs/specs/PLANTILLA.md
   - Convenciones de .ai/context.md (sitio estatico, sin build)
@@ -11,7 +11,7 @@ dependencias:
   - src/index.html, src/assets/css/main.css, src/assets/js/main.js
   - CDN externo gsap@3.12.5 + ScrollTrigger (pineado + SRI)
 tablas_impactadas: []
-criterio_aceptacion: El esqueleto carga sin errores con GSAP por CDN, cada seccion expone su slot data-effect, scripts/servir.* levanta el servidor local en 200, y el CI sigue verde (job artefactos, sin cambios).
+criterio_aceptacion: El esqueleto carga sin errores con GSAP por CDN, cada seccion expone su slot data-effect, scripts/servir.* levanta el servidor local en 200, modo background verificado (200 sin ventana + puerto cerrado al detener), y el CI sigue verde (job artefactos, sin cambios).
 ---
 
 # Base extensible del sitio
@@ -30,6 +30,7 @@ reescribir lo existente.
   - Carga de GSAP + ScrollTrigger por CDN pineado con SRI
   - 1 modulo de ejemplo inerte (registra el slot sin animar: prueba la convencion)
   - Lanzador local `scripts/servir.ps1` + `scripts/servir.bat` (doble clic: sirve `src/` en puerto 8000)
+  - Modo background sin ventana: `scripts/iniciar.vbs` (guarda PID en `scripts/.servir.pid`, ignorado por git) + `scripts/detener.bat`
 - Excluye (explícito):
   - Efectos concretos (se definen despues, uno por feature)
   - Contenido final de la home y paginas de destino
@@ -41,6 +42,7 @@ reescribir lo existente.
 - `src/assets/js/main.js`: loader — escanea `[data-effect]`, importa el modulo correspondiente, lo inicializa; slots sin modulo registrado se ignoran sin error
 - `src/assets/js/effects/none.js` (ejemplo inerte): registra el slot sin animar
 - `scripts/servir.ps1`: sirve `src/` en `http://localhost:8000` (Python; fallback `npx serve`); `scripts/servir.bat` lo invoca con doble clic
+- `scripts/iniciar.vbs`: mismo servidor sin ventana (PID en `scripts/.servir.pid`); `scripts/detener.bat` lo apaga (por PID, respaldo por puerto)
 
 ## 4. Stack y dependencias
 HTML5/CSS3/JS vanilla + GSAP 3.12.5 + ScrollTrigger via CDN (sin npm, sin
@@ -52,11 +54,11 @@ build, sin backend). CI sin cambios (`artefactos`).
 - GSAP por CDN pineado + SRI en vez de npm/bundler. (Descartada: npm + importmap/bundler — innecesario con una sola dependencia; se re-evalua con spec propia si hay mas.)
 
 ## 6. Plan de verificación
-- Qué ejecuta `fx-test`: abrir `src/index.html` en navegador (via servidor estatico local, no `file://` por los modulos ES) sin errores en consola; `window.gsap` definido; cada `[data-effect]` resuelto o ignorado sin error; lanzador `servir.bat` responde 200 en `http://localhost:8000/index.html`; `python scripts/ci_checks.py` verde.
+- Qué ejecuta `fx-test`: abrir `src/index.html` en navegador (via servidor estatico local, no `file://` por los modulos ES) sin errores en consola; `window.gsap` definido; cada `[data-effect]` resuelto o ignorado sin error; lanzador `servir.bat` responde 200 en `http://localhost:8000/index.html`; modo background: `iniciar.vbs` responde 200 sin ventana visible y `detener.bat` deja el puerto 8000 cerrado; `python scripts/ci_checks.py` verde.
 - Qué revisa `my-review`: sin duplicados, sin secretos, SRI presente en los `<script>` CDN, degradacion sin red (la pagina es legible aunque el CDN falle).
 
 ## 7. Criterio de aceptación
-El esqueleto carga sin errores con GSAP por CDN, cada seccion expone su slot data-effect, scripts/servir.* levanta el servidor local en 200, y el CI sigue verde (job artefactos, sin cambios).
+El esqueleto carga sin errores con GSAP por CDN, cada seccion expone su slot data-effect, scripts/servir.* levanta el servidor local en 200, modo background verificado (200 sin ventana + puerto cerrado al detener), y el CI sigue verde (job artefactos, sin cambios).
 
 ## 8. Lecciones del fix (DESPUÉS de implementar, obligatorio)
 
@@ -71,9 +73,10 @@ solución):
 3. **Registrar** abajo con etiqueta `[LOCAL]` (vale para este spec) o
    `[GENERAL]` (candidata a `context.md` en el replan).
 
-- Fix aplicado: correccion de `servir.ps1` — `Join-Path` con 2 hijos posicionales falla; anidado en 2 llamadas [LOCAL].
-- Qué sección de este spec cambia por el fix: ninguna (el spec era correcto; bug solo en codigo nuevo).
-- Test anti-regresión que lo cubre: corrida del lanzador en job + `Invoke-WebRequest` 200 a `/index.html` (§6).
+- Fix aplicado (1): correccion de `servir.ps1` — `Join-Path` con 2 hijos posicionales falla; anidado en 2 llamadas [LOCAL].
+- Fix aplicado (2): `detener.bat` — `tasklist | findstr` con 2 terminos rompia el parseo cmd ("No se esperaba ."); reescrito con `taskkill /FI` sin pipes [LOCAL].
+- Qué sección de este spec cambia por el fix: ninguna (el spec era correcto; bugs solo en codigo nuevo).
+- Test anti-regresión que lo cubre: ciclo `iniciar.vbs` → 200 sin ventana → `detener.bat` → puerto cerrado + `.pid` eliminado (§6).
 
 **Hotfix (excepción explícita)**: si la urgencia impide el spec previo, se
 aplica directo PERO deja trazabilidad (qué, por qué, riesgo) y tests

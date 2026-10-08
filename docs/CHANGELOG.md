@@ -11,6 +11,7 @@ specs viejos no sean cementerio: lo promovible vive aquí, no solo en §8).
 | 2026-10-07 | `Join-Path` acepta 1 solo hijo posicional: anidar llamadas | error | docs/specs/base-extensible.md §8 |
 | 2026-10-07 | Sin npm ni bundler con 1 sola dependencia: CDN pineado + SRI; re-evaluar con spec propia si hay mas | decisión | .ai/context.md |
 | 2026-10-07 | `/adoptar-gitflow` se ejecuto desde otro proyecto por error: el registro vale solo donde se documenta (.ai/ + README + CHANGELOG de ESTE repo) | lección | .ai/context.md (Ramas) |
+| 2026-10-07 | En `.bat`, `tasklist \| findstr` con 2 terminos rompe el parseo: preferir `taskkill /FI` sin pipes | error | docs/specs/base-extensible.md §8 |
 
 ## Entradas
 
@@ -30,3 +31,9 @@ scaffold, sin re-copies). Flujo documentado en `.ai/context.md` (Ramas) y
 `.ai/commands.md` (Publicacion via `gh-publish.ps1`); `agents.md` con
 worktree vigente. Pendiente manual del humano: proteccion de `main`
 (PR sin approvals), `Pages` → `GitHub Actions`, `gh auth`.
+
+### 2026-10-07 — Enmienda: modo background (spec `base-extensible.md`)
+`scripts/iniciar.vbs` (sin ventana, PID en `scripts/.servir.pid`,
+ignorado por git) + `scripts/detener.bat` (apaga por PID con `/T`,
+respaldo por puerto). Verificado: 200 sin ventana visible, puerto
+cerrado + `.pid` eliminado al detener. Un fix (`taskkill /FI`).
