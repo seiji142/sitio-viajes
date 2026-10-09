@@ -12,6 +12,7 @@ specs viejos no sean cementerio: lo promovible vive aquí, no solo en §8).
 | 2026-10-07 | Sin npm ni bundler con 1 sola dependencia: CDN pineado + SRI; re-evaluar con spec propia si hay mas | decisión | .ai/context.md |
 | 2026-10-07 | `/adoptar-gitflow` se ejecuto desde otro proyecto por error: el registro vale solo donde se documenta (.ai/ + README + CHANGELOG de ESTE repo) | lección | .ai/context.md (Ramas) |
 | 2026-10-07 | En `.bat`, `tasklist \| findstr` con 2 terminos rompe el parseo: preferir `taskkill /FI` sin pipes | error | docs/specs/base-extensible.md §8 |
+| 2026-10-07 | Comandos globales deben ofrecer la salida "sin build/n-a": si el comando asume compilacion, los repos estaticos quedan sin respuesta valida | lección [GENERAL] | ~/.config/opencode/commands/adoptar-gitflow.md (paso 2b) |
 
 ## Entradas
 
