@@ -25,6 +25,52 @@ Este proyecto **no define comandos slash**. Crear uno requiere un archivo en
 `.opencode/commands/<nombre>.md` o una sección `command` en `opencode.json`; ninguno
 de los dos existe. Los built-in de OpenCode son `/init`, `/undo`, `/redo`, `/share`, `/help`.
 
+## Clasificacion del cambio: SDD u ODD
+
+Todo cambio autorizado se clasifica ANTES de escribir codigo. O lleva spec
+(`docs/specs/<tema>.md`) o va en modo ODD. No hay tercera via.
+
+### Prueba de reanudacion (decide; el tamano no)
+
+Modo ODD solo si se cumplen las tres:
+1. **Entendido**: no queda ninguna decision de producto abierta.
+2. **Riesgo contenido**: no toca ningun escalador duro.
+3. **Reanudable**: enumera las decisiones abiertas. Si alguna no se resuelve
+   con el pedido o con `git diff` (incluida cualquier convencion que tengas
+   que suponer), entonces no es ODD.
+
+Falla cualquiera -> modo SDD (spec completo, y FICHA si hay entregable).
+
+El conteo de archivos, lineas, tests o tareas NUNCA decide: un cambio de
+una linea en auth es SDD; uno de 20 en un README puede ser ODD.
+
+### Escaladores duros (siempre SDD)
+
+Seguridad/auth, datos o migraciones, contratos de API que otros consumen,
+dependencias nuevas, CI/workflows, crypto, permisos de `opencode.json`,
+reglas y roles (`.ai/system.md`, `.ai/rules.md`, `.ai/commands.md`,
+`.ai/agents.md`) o skills (`.agents/skills/`), operaciones irreversibles,
+y `scripts/`.
+
+### Que entrega cada modo
+
+| | SDD | ODD |
+|---|---|---|
+| Documento | spec + FICHA | ninguno |
+| Evidencia | §6, §7 y §8 del spec | commit + resultado observado en el chat |
+| Verificacion pre-PR | obligatoria | obligatoria (identica) |
+| Auditoria, si el proyecto la define | segun sus disparadores | segun sus disparadores |
+
+En ODD la evidencia vive en el commit: asunto en imperativo y en el cuerpo
+`ODD: <por que> / <que se observo>`. Sin esa linea no es ODD: es un cambio
+sin evidencia.
+
+### Prohibido
+
+- Usar ODD para saltarse el criterio de aceptacion explicito del usuario.
+- Declarar ODD despues de implementar para justificar la falta de spec.
+- Partir un cambio SDD en varios ODD para esquivar el spec.
+
 ## Validacion pre-PR (obligatoria, bloqueante)
 
 NINGUN PR se abre sin completar la checklist, sin excepciones
@@ -41,6 +87,10 @@ por "cambio chico". Este es codigo visual (sitio estatico HTML/CSS/JS).
    dudosos verificados con `youtube_transcript_read`.
 6. [ ] Criterio de aceptacion EXPLICITO del usuario en el chat.
    Sin ese mensaje, NO hay PR.
+   Cuenta: una frase sobre el CAMBIO ("el endpoint devuelve 200", "el
+   typo ya no esta", "el kit quedo integrado").
+   No cuenta: la orden de publicar ("abre el PR", "mergea", "subilo"):
+   autoriza la accion, no acepta el resultado.
 
 ### Cierre
 
@@ -67,3 +117,6 @@ Todo PR y merge pasa por `scripts/gh-publish.ps1` (ejecutar desde la raiz del re
 Pre-publicar a `main`: OK visual EXPLICITO del usuario en el chat + Pages
 activado (`Settings` → `Pages` → `Source: GitHub Actions`). Sin ese mensaje,
 NO hay PR a `main`.
+Cuenta: una frase sobre el CAMBIO ("se ve bien en movil y escritorio").
+No cuenta: la orden de publicar ("publica", "mergea", "subilo a main"):
+autoriza la accion, no acepta el resultado.
